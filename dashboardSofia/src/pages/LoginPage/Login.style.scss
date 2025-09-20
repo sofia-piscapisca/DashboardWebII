@@ -1,0 +1,130 @@
+.loginPage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    width: 100%;
+    height: calc(100vh - 146px);
+    margin: 0;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.loginPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 48px;
+    max-width: 629px;
+    width: 100%;
+}
+
+.loginPageTitleContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.loginTitle {
+    font-weight: bolder;
+    font-size: 50px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin: 0;
+    color: black;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+}
+
+.meuTitle{
+    font-weight: bolder;
+    font-size: 35px;
+    line-height: 100%;
+    margin: 0;
+    color: #3D64FF;
+}
+
+.gestorTitle{
+    font-weight: bolder;
+    font-size: 35px;
+    line-height: 100%;
+    margin: 0;
+    color: #2A226D;
+}
+
+.subtitleAndSaly {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: flex-start;
+}
+
+.loginPageSubtitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 32px;
+}
+
+.loginSubtitleRegular {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    margin: 0;
+    color: #000;
+}
+
+.registerText {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    margin: 0;
+    color: #3D64FF;
+}
+
+.salyImage {
+    margin-top: -100px;
+}
+
+// Hide Saly image on smaller screens where flex wraps
+@media (max-width: 768px) {
+    .salyImage {
+        display: none;
+    }
+    
+    .loginPage {
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px;
+        height: calc(100vh - 62px);
+    }
+    .loginPageContainer {
+        max-width: 369px;
+    }
+    .loginTitle {
+        font-size: 26px;
+    }
+    .meuTitle {
+        font-size: 26px;
+    }
+    .gestorTitle{
+        font-size: 26px;
+    }
+    .registerText {
+        font-size: 18px;
+    }
+    .loginSubtitleRegular {
+        font-size: 18px;
+    }
+}
+

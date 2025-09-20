@@ -1,11 +1,15 @@
 .buttonBody {
+    display: flex;
+    justify-content: center;
     background-color: #3d64ff;
     border-radius: 9px;
+    min-width: 322px;
     max-width: 369px;
-    width: 100%;
-    padding: 16px;
+    max-height: 59px;
+    padding: 16px 0 16px 0;
     box-shadow: 0px 4px 61px 0px #4D47C366;
-
+    cursor: pointer;
+    width: 100%;
 }
 
 .buttonLabel {

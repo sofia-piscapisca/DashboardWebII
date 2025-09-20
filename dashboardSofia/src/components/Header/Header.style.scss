@@ -1,0 +1,21 @@
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+}
+
+.headerLogo {
+    height: 146px;
+    width: 146px;
+    cursor: pointer;
+}
+
+// Responsive logo sizing
+@media (max-width: 768px) {
+    .headerLogo {
+        height: 62px;
+        width: 62px;
+    }
+}

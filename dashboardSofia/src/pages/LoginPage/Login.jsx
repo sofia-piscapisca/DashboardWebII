@@ -1,39 +1,50 @@
-import { useState } from 'react'
-import apple from '../../assets/apple.svg'
-import facebook from '../../assets/Facebook.svg'
-import google from '../../assets/google.svg'
-import logo from '../../assets/logo.svg'
-import saly from '../../assets/saly-14.svg'
-import './Login.style.scss'
+import { useState } from "react";
+import LoginComponent from "../../components/LoginComponent/LoginComponent";
+import saly from "../../assets/saly-14.svg";
+import "./Login.style.scss";
 
-const Login =()=> {
-  const loginSkeleton = {email: "", password: ""} 
-  const [loginInfo, setLoginInfo] = useState(loginSkeleton) 
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    //IMPLEMENT LOGIN ACTION
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="loginPage">
+      <div className="loginPageContainer">
+        <div className="loginPageTitleContainer">
+          <p className="loginTitle">Faça seu login em</p>
+          <div className="line">
+            <p className="meuTitle">Meu</p>
+            <p className="gestorTitle">Gestor</p>
+          </div>
+        </div>
+        <div className="subtitleAndSaly">
+          <div className="loginPageSubtitleContainer">
+            <p className="loginSubtitleRegular">
+              Se você ainda não tem uma conta,
+            </p>
+            <div className="line">
+              <p className="loginSubtitleRegular">Você pode se</p>
+              &nbsp;
+              <p className="registerText">Registrar aqui!</p>
+            </div>
+          </div>
+          <img src={saly} alt="saly" className="salyImage" />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
 
-export default App
+      <LoginComponent
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        handleLogin={handleLogin}
+      />
+    </div>
+  );
+};
+
+export default Login;

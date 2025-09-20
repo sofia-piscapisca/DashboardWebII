@@ -1,11 +1,52 @@
 .textBoxBody {
-    max-width: 369px;
-    height: 62px;
-    background-color: #d8e0fe;
-    color: #3d64ff;
+  // Target the MUI InputBase root
+  .MuiInputBase-root {
     border: none;
     border-radius: 8px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    padding: 8px;
+    height: 62px;
+    max-width: 369px;
   }
+  
+  // Target the MUI OutlinedInput root  
+  .MuiOutlinedInput-root {
+    background-color: #d8e0fe;
+    border: none;
+  }
+
+  // Target the input field itself
+  .MuiOutlinedInput-input {
+    color: #3D64FF;
+    font-family: "Poppins", sans-serif;
+  }
+
+  // Target the fieldset (border)
+  .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+  
+  // Target the label
+  .MuiInputLabel-root {
+    color: #3D64FF;
+    font-family: "Poppins", sans-serif;
+    
+    // Label when focused/active
+    &.Mui-focused {
+      color: #3D64FF;
+    }
+  }
+}
+
+passwordIcon {
+  outline: none !important;
+}
+
+// Style the visibility icons
+.textBoxBody {
+  .MuiIconButton-root {
+    color: #3D64FF;
+    
+    &:hover {
+      background-color: rgba(61, 100, 255, 0.1);
+    }
+  }
+}
