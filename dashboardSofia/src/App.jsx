@@ -1,15 +1,18 @@
+import React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import Login from "./pages/LoginPage/Login";
-import Header from "./components/Header/Header";
+import Dashboard from "./pages/DashboardPage/Dashboard";
+import Products from "./pages/ProductsPage/Products";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/products" element={<Products />} />
       </Routes>
     </BrowserRouter>
   );
