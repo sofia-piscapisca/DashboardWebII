@@ -1,15 +1,37 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/LoginPage/Login";
-import Header from "./components/Header/Header";
+import Dashboard from "./pages/DashboardPage/Dashboard";
+import Products from "./pages/ProductsPage/Products";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
+        {/* Redireciona a raiz para login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Página de Login */}
         <Route path="/login" element={<Login />} />
+
+        {/* Rotas protegidas */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/products"
+          element={
+            <PrivateRoute>
+              <Products />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

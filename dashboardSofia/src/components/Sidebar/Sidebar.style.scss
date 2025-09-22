@@ -1,0 +1,30 @@
+.sidebar {
+  width: 220px;
+  background: #f8f9fa;
+  height: 100vh;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.menu-item {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: #e2e6ea;
+}
+
+.logout {
+  color: red;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  background: none;
+  width: 100%;
+}
