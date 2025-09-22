@@ -1,18 +1,11 @@
-export const api = async (endpoint, options = {}) => {
-  const token = localStorage.getItem("token");
+import axios from "axios";
 
-  const defaultOptions = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
+export const api = axios.create({
+  baseURL: "https://api-node-test-6c4b0a5d4c87.herokuapp.com",
+});
 
-  const response = await fetch(endpoint, { ...defaultOptions, ...options });
-
-  if (!response.ok) {
-    throw new Error("Erro ao buscar dados da API");
-  }
-
-  return response.json();
-};
+api.interceptors.request.use((config) => {
+  const tokeN = localStorage.getItem("token");
+  if(tokeN) config.headers.Authorization = `Bearer ${tokeN}`;
+  return config;
+});

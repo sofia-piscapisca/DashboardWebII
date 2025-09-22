@@ -1,29 +1,24 @@
-import axios from "axios";
+import { api } from "./api";
 
-const API_URL = "https://api-node-test-6c4b0a5d4c87.herokuapp.com";
+export async function pegarLoginPegarUsuario({email, password}) {
+    const { data } = await api.post("/login", { email, password });
+    const token = data.accessToken; 
+    const partialUser = data.user || {};
 
-export const login = async (email, senha) => {
-  try {
-    const response = await axios.post(`${API_URL}/login`, {
-      email,
-      senha,
-    });
+    localStorage.setItem("token", token);
 
-    // Se a API retornar sucesso, salvar no localStorage
-    if (response.data) {
-      localStorage.setItem("user", JSON.stringify(response.data));
+    let user = partialUser; 
+    if (user.id == null) { 
+        const { data: users } = await api.get(
+            `/user?email=${encodeURIComponent(email)}`
+        );
+        user = users?.[0] || partialUser;
     }
+    localStorage.setItem("user", JSON.stringify(user));
+    return { token, user };
+}
 
-    return response.data;
-  } catch (error) {
-    throw error.response?.data?.message || "Erro ao fazer login.";
-  }
-};
-
-export const logout = () => {
-  localStorage.removeItem("user");
-};
-
-export const getUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
-};
+export function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+}

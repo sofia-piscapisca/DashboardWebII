@@ -1,80 +1,79 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../services/authService";
+import { use, useState } from "react";
 import LoginComponent from "../../components/LoginComponent/LoginComponent";
 import saly from "../../assets/saly-14.svg";
 import "./Login.style.scss";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  async function handleSubmit (e) {
     e.preventDefault();
-    setError("");
-
-    if (!email || !password) {
-      setError("Preencha todos os campos.");
+    
+    if(!email.trim() || !password.trim()) {
+      setError("Todos os campos devem ser preenchidos");
       return;
     }
 
+    setError(null);
+    setLoading(true);
+  
     try {
-      setLoading(true);
-      const data = await loginUser(email, password);
-
-      // Salva usuário e token
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
-
-      // Redireciona
-      navigate("/dashboard");
+      const user = await pegarLoginPegarUsuario(email, password);
+      console.log("Usuário realizou o login:", user);
+      navigate("/Dashboard");
     } catch (err) {
-      setError("Usuário ou senha inválidos.");
+      const apiMsg = err?.response?.data || err?.message || "Erro ao fazer login.";
+      console.log("Erro ao fazer login:", apiMsg);
+      setError(typeof apiMsg === "string" ? apiMsg : "Erro ao fazer login.");
     } finally {
-      setLoading(false);
+      setLoading(false);      
     }
+  
+  }
+
+  const handleLogin = () => {
+    setLoading(true);
+    //IMPLEMENT LOGIN ACTION
   };
 
   return (
-    <div className="loginContainer">
-      <div className="loginLeft">
-        <h1>
-          Faça seu login em <span className="highlight">MeuGestor</span>
-        </h1>
-        <p>
-          Se você ainda não tem uma conta,
-          <br />
-          você pode se <a href="#">registrar aqui!</a>
-        </p>
-        <img src={saly} alt="Login Illustration" />
+    <div className="loginPage">
+      <div className="loginPageContainer">
+        <div className="loginPageTitleContainer">
+          <p className="loginTitle">Faça seu login em</p>
+          <div className="line">
+            <p className="meuTitle">Meu</p>
+            <p className="gestorTitle">Gestor</p>
+          </div>
+        </div>
+        <div className="subtitleAndSaly">
+          <div className="loginPageSubtitleContainer">
+            <p className="loginSubtitleRegular">
+              Se você ainda não tem uma conta,
+            </p>
+            <div className="line">
+              <p className="loginSubtitleRegular">Você pode se</p>
+              &nbsp;
+              <p className="registerText">Registrar aqui!</p>
+            </div>
+          </div>
+          <img src={saly} alt="saly" className="salyImage" />
+        </div>
       </div>
 
-      <div className="loginRight">
-        <form className="loginForm" onSubmit={handleLogin}>
-          <h2>Login</h2>
-          <input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          {error && <p className="errorMessage">{error}</p>}
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Entrando..." : "Login"}
-          </button>
-        </form>
-      </div>
+      <LoginComponent
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        handleLogin={handleLogin}
+      />
     </div>
   );
 };
